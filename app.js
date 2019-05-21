@@ -126,7 +126,7 @@ router.get('/', (request, response) => {
         response.render('landing.hbs', {
             cart: cart,
             sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
-            loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>'
+            loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>'
         });
     }
 });
@@ -149,7 +149,7 @@ router.get('/cart', redirectNotLoggedIn, (request, response) => {
         response.render('cart.hbs', {
             cart: request.session.cart,
             items: request.session.cart,
-            loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>',
+            loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>',
             sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
             tax: Math.round((arr.arrSum(sub_total) * 0.12) * 100) / 100,
             total: Math.round((arr.arrSum(sub_total) * 1.12) * 100) / 100,
@@ -188,7 +188,7 @@ router.get('/groceries', (request, response) => {
             cart: cart,
             sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
             products: require('./data/groceries'),
-            loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>',
+            loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>',
         });
     }
 });
@@ -222,7 +222,7 @@ router.get('/electronics', (request, response) => {
             cart: cart,
             sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
             products: require('./data/electronics'),
-            loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>',
+            loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>',
         });
     }
 });
@@ -256,7 +256,7 @@ router.get('/instruments', (request, response) => {
             sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
             cart: cart,
             products: require('./data/instruments'),
-            loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>'
+            loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>'
         });
     }
 });
@@ -287,7 +287,7 @@ router.get('/aboutus', (request, response) => {
         response.render('aboutus.hbs', {
             cart: cart,
             sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
-            loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>',
+            loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>',
         });
     }
 });
@@ -322,7 +322,7 @@ router.get('/todays_deals', (request, response) => {
             response.render('todays_deals.hbs', {
                 cart: cart,
                 sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
-                loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>',
+                loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>',
                 item: result.deal
             });
         }
@@ -377,17 +377,19 @@ app.post('/login', (request, response) => {
         response.render('landing.hbs', {
             cart: cart,
             sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
-            popup: '<script>\n' +
-                '    $(document).ready(function(){\n' +
-                '        alert(\'Invalid verification code, try again!\');\n' +
-                '    });\n' +
-                '</script>',
             loginlogoutButton: '<li class="nav-item" id="loginbutton"><a href="#" class="nav-link" data-toggle="modal" data-target="#login">Login</a></li>',
             imgTag: '<img id="captchapng" src="/vcode" alt="Smiley face" height="30" width="80">',
             modal: '<script type="text/javascript">\n' +
                 '    $(window).on(\'load\',function(){\n' +
                 '        $(\'#login\').modal(\'show\');\n' +
                 '    });\n' +
+                '</script>',
+            popup: '<script>\n' +
+                '    $(document).ready(function () {\n' +
+                '        var mymodal = document.querySelector(\'.popup8\');\n' +
+                '        mymodal.style.visibility = \'visible\';\n' +
+                '        mymodal.style.opacity = \'1\';\n' +
+                '    })\n' +
                 '</script>'
         });
         return;
@@ -403,9 +405,11 @@ app.post('/login', (request, response) => {
                 sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
                 cart: cart,
                 popup: '<script>\n' +
-                    '    $(document).ready(function(){\n' +
-                    '        alert(\'Invalid login information, try again!\');\n' +
-                    '    });\n' +
+                    '    $(document).ready(function () {\n' +
+                    '        var mymodal = document.querySelector(\'.popup6\');\n' +
+                    '        mymodal.style.visibility = \'visible\';\n' +
+                    '        mymodal.style.opacity = \'1\';\n' +
+                    '    })\n' +
                     '</script>',
                 loginlogoutButton: '<li class="nav-item" id="loginbutton"><a href="#" class="nav-link" data-toggle="modal" data-target="#login">Login</a></li>',
                 imgTag: '<img id="captchapng" src="/vcode" alt="Smiley face" height="30" width="80">',
@@ -437,7 +441,7 @@ app.post('/login', (request, response) => {
                     response.render('landing.hbs', {
                         sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
                         cart: cart,
-                        loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>'
+                        loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>'
                     });
                 } else {
                     var cart = [{
@@ -449,9 +453,11 @@ app.post('/login', (request, response) => {
                         cart: cart,
                         sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
                         popup: '<script>\n' +
-                            '    $(document).ready(function(){\n' +
-                            '        alert(\'Invalid login information, try again!\');\n' +
-                            '    });\n' +
+                            '    $(document).ready(function () {\n' +
+                            '        var mymodal = document.querySelector(\'.popup6\');\n' +
+                            '        mymodal.style.visibility = \'visible\';\n' +
+                            '        mymodal.style.opacity = \'1\';\n' +
+                            '    })\n' +
                             '</script>',
                         loginlogoutButton: '<li class="nav-item" id="loginbutton"><a href="#" class="nav-link" data-toggle="modal" data-target="#login">Login</a></li>',
                         imgTag: '<img id="captchapng" src="/vcode" alt="Smiley face" height="30" width="80">',
@@ -467,9 +473,11 @@ app.post('/login', (request, response) => {
                     cart: cart,
                     sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
                     popup: '<script>\n' +
-                        '    $(document).ready(function(){\n' +
-                        '        alert(\'Invalid login information, try again!\');\n' +
-                        '    });\n' +
+                        '    $(document).ready(function () {\n' +
+                        '        var mymodal = document.querySelector(\'.popup6\');\n' +
+                        '        mymodal.style.visibility = \'visible\';\n' +
+                        '        mymodal.style.opacity = \'1\';\n' +
+                        '    })\n' +
                         '</script>',
                     loginlogoutButton: '<li class="nav-item" id="loginbutton"><a href="#" class="nav-link" data-toggle="modal" data-target="#login">Login</a></li>',
                     imgTag: '<img id="captchapng" src="/vcode" alt="Smiley face" height="30" width="80">',
@@ -512,16 +520,18 @@ app.post('/register', function (request, response) {
             response.render('landing.hbs', {
                 cart: cart,
                 sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
-                loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>'
+                loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>'
             });
         } else {
             response.render('landing.hbs', {
                 cart: cart,
                 sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
                 popup: '<script>\n' +
-                    '    $(document).ready(function(){\n' +
-                    '        alert(\'An account already exists with that username, try again!\');\n' +
-                    '    });\n' +
+                    '    $(document).ready(function () {\n' +
+                    '        var mymodal = document.querySelector(\'.popup7\');\n' +
+                    '        mymodal.style.visibility = \'visible\';\n' +
+                    '        mymodal.style.opacity = \'1\';\n' +
+                    '    })\n' +
                     '</script>',
                 loginlogoutButton: '<li class="nav-item" id="loginbutton"><a href="#" class="nav-link" data-toggle="modal" data-target="#login">Login</a></li>',
                 imgTag: '<img id="captchapng" src="/vcode" alt="Smiley Face" height="30" width="80">',
@@ -702,7 +712,7 @@ app.get('/checkout', redirectNotLoggedIn, (request, response) => {
         response.render('cart.hbs', {
             cart: request.session.cart,
             items: request.session.cart,
-            loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>',
+            loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>',
             sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
             tax: Math.round((arr.arrSum(sub_total) * 0.12) * 100) / 100,
             total: Math.round((arr.arrSum(sub_total) * 1.12) * 100) / 100,
@@ -730,7 +740,7 @@ app.get('/checkout', redirectNotLoggedIn, (request, response) => {
     response.render('landing.hbs', {
         cart: cart,
         sub_total: 0,
-        loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>',
+        loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>',
         orderPlaced: '<script>\n' +
             '    var mymodal = document.querySelector(\'.popup5\');\n' +
             '    mymodal.style.visibility = \'visible\';\n' +
@@ -764,7 +774,7 @@ app.get('/checkout_points', redirectNotLoggedIn, (request, response) => {
         response.render('cart.hbs', {
             cart: request.session.cart,
             items: request.session.cart,
-            loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>',
+            loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>',
             sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
             tax: Math.round((arr.arrSum(sub_total) * 0.12) * 100) / 100,
             total: Math.round((arr.arrSum(sub_total) * 1.12) * 100) / 100,
@@ -783,7 +793,7 @@ app.get('/checkout_points', redirectNotLoggedIn, (request, response) => {
         response.render('cart.hbs', {
             cart: request.session.cart,
             items: request.session.cart,
-            loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>',
+            loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>',
             sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
             tax: Math.round((arr.arrSum(sub_total) * 0.12) * 100) / 100,
             total: Math.round((arr.arrSum(sub_total) * 1.12) * 100) / 100,
@@ -808,7 +818,7 @@ app.get('/checkout_points', redirectNotLoggedIn, (request, response) => {
         });
         response.render('landing.hbs', {
             cart: cart,
-            loginlogoutButton: '<li class="nav-item" id="cart"><a href="http://localhost:8080/logout" class="nav-link">Logout</a></li>',
+            loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>',
             orderPlaced: '<script>\n' +
                 '    var mymodal = document.querySelector(\'.popup5\');\n' +
                 '    mymodal.style.visibility = \'visible\';\n' +
