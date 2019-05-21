@@ -447,8 +447,6 @@ app.post('/login', (request, response) => {
                     continue;
                 }
             } else {
-                console.log(result.length);
-                console.log(i);
                 if ((i + 1) === result.length) {
                     var cart = [{
                         title: "No Items",
