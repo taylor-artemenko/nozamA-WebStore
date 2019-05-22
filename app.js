@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const captchapng = require("captchapng");
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const arr = require('./arrMethods');
 const sched = require('node-schedule');
 
@@ -36,7 +37,10 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 60 * 2,
         sameSite: true,
-    }
+    },
+    store: new MongoStore({
+        url: "mongodb+srv://taylor:test123@acit2911-an76n.mongodb.net/test?retryWrites=true"
+    })
 }));
 
 const getLocalDeal = () => {
