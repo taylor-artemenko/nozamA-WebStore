@@ -13,6 +13,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "connect-mongo": "^2.0.3",
+    "connect-mongodb-session": "^2.1.1",
     "cookie-parser": "^1.4.4",
     "debug": "^2.6.9",
     "encodeurl": "^1.0.2",
