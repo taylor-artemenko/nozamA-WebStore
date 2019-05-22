@@ -72,30 +72,6 @@ describe('GET /todays_deals', function () {
     });
 });
 
-describe("POSTS /register", function () {
-    it('should signup as mocha@gmail.com ', (done) => {
-        chai.request.agent(app)
-            .post('/register')
-            .send({
-                username: "mocha@gmail.com",
-                password: "Test1234",
-            });
-            done();
-    });
-});
-
-describe("POSTS /login", function () {
-    it('should login as mocha@gmail.com ', (done) => {
-        chai.request.agent(app)
-            .post('/login')
-            .send({
-                username: "mocha@gmail.com",
-                password: "Test1234",
-            });
-        done();
-    });
-});
-
 describe("GET /unknownPage", function () {
     it('should redirect for unknown route', function (done) {
         chai.request(app)
@@ -129,23 +105,6 @@ describe('GET /cart', function () {
     });
 });
 
-describe('POST /add_cart/:id', function () {
-    it("should add something to the cart and redirect to the cart page", function (done) {
-        chai.request(app)
-            .post('/add_cart/headphones1')
-            .send({
-                "id": "headphones1",
-                "img": "<img class=\"card-img-top img-fit\" src=\"img/products/electronics/headphones.png\" alt=\"Card image cap\">",
-                "title": "Slick Headphones",
-                "description": "Amazing look. Amazing sound. Amazing taste.",
-                "price": 89.99,
-                "qty": 1,
-                "cartImg": "<img src=\"img/products/electronics/headphones.png\" class=\"img-fit cart-img\" alt=\"cart item image\">"
-            });
-        done();
-    });
-});
-
 describe('GET /checkout', function () {
     it("should run the checkout functions", function (done) {
         chai.request(app)
@@ -165,18 +124,6 @@ describe('GET /checkout_points', function () {
                 expect(res).to.have.status(200);
                 done();
             })
-    });
-});
-
-describe("POSTS /update_cart", function () {
-    it('should update the item from quantity 1 to 2 ', (done) => {
-        chai.request.agent(app)
-            .post('/update_cart')
-            .send({
-                qty: 2,
-                "headphones1": "headphones1",
-            });
-        done();
     });
 });
 
