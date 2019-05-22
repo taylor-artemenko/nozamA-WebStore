@@ -8,7 +8,7 @@ module.exports.getDb = () => {
 
 
 module.exports.init = function(callback) {
-    MongoClient.connect('mongodb://heroku_8vt9b6p4:test123@ds259586.mlab.com:59586/heroku_8vt9b6p4', (err, client) => {
+    MongoClient.connect("mongodb+srv://taylor:test123@acit2911-an76n.mongodb.net/test?retryWrites=true", (err, client) => {
         if (err) {
             return console.log('Unable to connect to DB')
         }
