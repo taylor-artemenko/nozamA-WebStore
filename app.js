@@ -454,7 +454,33 @@ app.post('/login', (request, response) => {
                         loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>'
                     });
                 } else {
-                    continue;
+                    if ((i + 1) === result.length) {
+                        var cart = [{
+                            title: "No Items",
+                            price: 0,
+                            qty: 0,
+                        }];
+                        response.render('landing.hbs', {
+                            cart: cart,
+                            sub_total: Math.round(arr.arrSum(sub_total) * 100) / 100,
+                            popup: '<script>\n' +
+                                '    $(document).ready(function () {\n' +
+                                '        var mymodal = document.querySelector(\'.popup6\');\n' +
+                                '        mymodal.style.visibility = \'visible\';\n' +
+                                '        mymodal.style.opacity = \'1\';\n' +
+                                '    })\n' +
+                                '</script>',
+                            loginlogoutButton: '<li class="nav-item" id="loginbutton"><a href="#" class="nav-link" data-toggle="modal" data-target="#login">Login</a></li>',
+                            imgTag: '<img id="captchapng" src="/vcode" alt="Smiley face" height="30" width="80">',
+                            modal: '<script type="text/javascript">\n' +
+                                '    $(window).on(\'load\',function(){\n' +
+                                '        $(\'#login\').modal(\'show\');\n' +
+                                '    });\n' +
+                                '</script>'
+                        });
+                    } else {
+                        continue;
+                    }
                 }
             } else {
                 if ((i + 1) === result.length) {
