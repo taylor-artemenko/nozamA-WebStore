@@ -12,6 +12,8 @@ var instruments_products = require('./data/instruments');
 var groceries_products = require('./data/groceries');
 var all_items = electronics_products.concat(instruments_products, groceries_products);
 
+const port = process.env.PORT || 8080;
+
 var app = express();
 const router = express.Router();
 
@@ -331,7 +333,7 @@ router.get('/todays_deals', (request, response) => {
 
 app.use('/', router);
 
-var server = app.listen(8080, () => {
+var server = app.listen(port, () => {
     console.log('Server is up and running');
     utils.init();
     setTimeout(function(){ getLocalDeal() }, 3000);
