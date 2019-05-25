@@ -453,6 +453,7 @@ app.post('/login', (request, response) => {
                         cart: cart,
                         loginlogoutButton: '<li class="nav-item" id="cart"><a href="/logout" class="nav-link">Logout</a></li>'
                     });
+                    return
                 } else {
                     if ((i + 1) === result.length) {
                         var cart = [{
