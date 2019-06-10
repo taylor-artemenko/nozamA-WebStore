@@ -53,6 +53,11 @@ const getLocalDeal = () => {
     const item = [];
     var randomItemIndex = Math.floor(Math.random() * deal_items.length);
     var randomItem = deal_items[randomItemIndex];
+    for (i=0; i < all_items.length; i++) {
+        if (all_items[i].id === randomItem.id) {
+            all_items[i].price = randomItem.price;
+            all_items[i].points = randomItem.points;
+    }
     item.push(randomItem);
     var myobj = { deal: item };
     db.collection('deal').drop().then(function () {
