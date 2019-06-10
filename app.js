@@ -57,6 +57,7 @@ const getLocalDeal = () => {
         if (all_items[i].id === randomItem.id) {
             all_items[i].price = randomItem.price;
             all_items[i].points = randomItem.points;
+        }
     }
     item.push(randomItem);
     var myobj = { deal: item };
