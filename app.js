@@ -11,6 +11,7 @@ const sched = require('node-schedule');
 var electronics_products = require('./data/electronics');
 var instruments_products = require('./data/instruments');
 var groceries_products = require('./data/groceries');
+var deal_items = require('./data/deal_items');
 var all_items = electronics_products.concat(instruments_products, groceries_products);
 
 const port = process.env.PORT || 8080;
@@ -50,11 +51,8 @@ app.use(session({
 const getLocalDeal = () => {
     var db = utils.getDb();
     const item = [];
-    const newList = Array.from(all_items);
-    var randomItemIndex = Math.floor(Math.random() * newList.length);
-    var randomItem = newList[randomItemIndex];
-    var discount = +(Math.round((randomItem.price * 0.25) + "e+2")  + "e-2");
-    randomItem.price -= +(Math.round((discount) + "e+2")  + "e-2");
+    var randomItemIndex = Math.floor(Math.random() * deal_items.length);
+    var randomItem = deal_items[randomItemIndex];
     item.push(randomItem);
     var myobj = { deal: item };
     db.collection('deal').drop().then(function () {
@@ -859,21 +857,17 @@ app.get('/checkout_points', redirectNotLoggedIn, (request, response) => {
 var j = sched.scheduleJob('0 0 * * *', function(){
     var db = utils.getDb();
     const item = [];
-    var randomItemIndex = Math.floor(Math.random() * all_items.length);
-    var randomItem = all_items[randomItemIndex];
-    var discount = +(Math.round((randomItem.price * 0.25) + "e+2")  + "e-2");
-    randomItem.price -= +(Math.round((discount) + "e+2")  + "e-2");
+    var randomItemIndex = Math.floor(Math.random() * deal_items.length);
+    var randomItem = deal_items[randomItemIndex];
     item.push(randomItem);
     var myobj = { deal: item };
     db.collection('deal').drop().then(function () {
         db.collection("deal").insertOne(myobj, function(err, res) {
             if (err) throw err;
-            console.log(res)
         });
     }).catch(function () {
         db.collection("deal").insertOne(myobj, function(err, res) {
             if (err) throw err;
-            console.log(res)
         });
     });
 });
