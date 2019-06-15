@@ -12,6 +12,7 @@ var electronics_products = require('./data/electronics');
 var instruments_products = require('./data/instruments');
 var groceries_products = require('./data/groceries');
 var all_items = electronics_products.concat(instruments_products, groceries_products);
+var prices = require('./data/prices');
 
 const port = process.env.PORT || 8080;
 
@@ -56,8 +57,11 @@ const getLocalDeal = () => {
             break;
         } else {
             if (all_items[i].id === currentDealItem) {
-                all_items[i].price *= 1.25;
-                checker = true
+                for (k=0; k < prices.length; k++) {
+                    if (prices[k].id === currentDealItem) {
+                        all_items[i].price = prices[k].price
+                    }
+                }
             }
         }
     }

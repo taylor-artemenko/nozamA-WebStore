@@ -1,0 +1,118 @@
+[
+  {
+    "id": "headphones1",
+    "price": 89.99
+  },
+  {
+    "id": "ipod1",
+    "price": 79.99
+  },
+  {
+    "id": "laptop1",
+    "price": 1899.99
+  },
+  {
+    "id": "mouse1",
+    "price": 149.99
+  },
+  {
+    "id": "tv1",
+    "price": 499.99
+  },
+  {
+    "id": "keyboard1",
+    "price": 120.99
+  },
+  {
+    "id": "webcam1",
+    "price": 99.99
+  },
+  {
+    "id": "ipod1",
+    "price": 79.99
+  },
+  {
+    "id": "calculator1",
+    "price": 10.99
+  },
+  {
+    "id": "cord1",
+    "price": 15.99
+  },
+  {
+    "id": "gps1",
+    "price": 250.99
+  },
+  {
+    "id": "butter1",
+    "price": 2.99
+  },
+  {
+    "id": "chips1",
+    "price": 3.99
+  },
+  {
+    "id": "coke1",
+    "price": 1.99
+  },
+  {
+    "id": "pepsi1",
+    "price": 1.99
+  },
+  {
+    "id": "egss1",
+    "price": 4.99
+  },
+  {
+    "id": "browneggs1",
+    "price": 9.99
+  },
+  {
+    "id": "banana1",
+    "price": 2.99
+  },
+  {
+    "id": "apple1",
+    "price": 0.99
+  },
+  {
+    "id": "banjo1",
+    "price": 419.99
+  },
+  {
+    "id": "clarinet1",
+    "price": 399.99
+  },
+  {
+    "id": "guitar1",
+    "price": 499.99
+  },
+  {
+    "id": "piano1",
+    "price": 1999.99
+  },
+  {
+    "id": "saxophone1",
+    "price": 399.99
+  },
+  {
+    "id": "triangle1",
+    "price": 19.99
+  },
+  {
+    "id": "otamatone1",
+    "price": 49.99
+  },
+  {
+    "id": "melodica1",
+    "price": 29.99
+  },
+  {
+    "id": "didgeridoo1",
+    "price": 299.99
+  },
+  {
+    "id": "may01",
+    "price": 3.99
+  }
+]
