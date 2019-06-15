@@ -47,7 +47,14 @@ app.use(session({
     store: store
 }));
 
+var currentDealItem = "";
+
 const getLocalDeal = () => {
+    for (i=0; i < all_items.length; i++) {
+        if (all_items[i].id === currentDealItem) {
+            all_items.price += 1.25;
+        }
+    }
     var db = utils.getDb();
     const item = [];
     var randomItemIndex = Math.floor(Math.random() * all_items.length);
@@ -56,6 +63,7 @@ const getLocalDeal = () => {
     randomItem.price -= +(Math.round((discount) + "e+2")  + "e-2");
     item.push(randomItem);
     var myobj = { deal: item };
+    currentDealItem = randomItem.id;
     db.collection('deal').drop().then(function () {
         db.collection("deal").insertOne(myobj, function(err, res) {
             if (err) throw err;
@@ -856,6 +864,11 @@ app.get('/checkout_points', redirectNotLoggedIn, (request, response) => {
 });
 
 var j = sched.scheduleJob('0 0 * * *', function(){
+    for (i=0; i < all_items.length; i++) {
+        if (all_items[i].id === currentDealItem) {
+            all_items.price += 1.25;
+        }
+    }
     var db = utils.getDb();
     const item = [];
     var randomItemIndex = Math.floor(Math.random() * all_items.length);
@@ -864,6 +877,7 @@ var j = sched.scheduleJob('0 0 * * *', function(){
     randomItem.price -= +(Math.round((discount) + "e+2")  + "e-2");
     item.push(randomItem);
     var myobj = { deal: item };
+    currentDealItem = randomItem.id;
     db.collection('deal').drop().then(function () {
         db.collection("deal").insertOne(myobj, function(err, res) {
             if (err) throw err;
