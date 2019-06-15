@@ -54,10 +54,11 @@ const getLocalDeal = () => {
     for (i=0; i < all_items.length; i++) {
         if (checker === true) {
             break;
-        }
-        if (all_items[i].id === currentDealItem) {
-            all_items.price *= 1.25;
-            checker = true
+        } else {
+            if (all_items[i].id === currentDealItem) {
+                all_items[i].price *= 1.25;
+                checker = true
+            }
         }
     }
     var db = utils.getDb();
