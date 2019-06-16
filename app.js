@@ -874,9 +874,18 @@ app.get('/checkout_points', redirectNotLoggedIn, (request, response) => {
 });
 
 var j = sched.scheduleJob('0 0 * * *', function(){
+    var checker = false;
     for (i=0; i < all_items.length; i++) {
-        if (all_items[i].id === currentDealItem) {
-            all_items.price += 1.25;
+        if (checker === true) {
+            break;
+        } else {
+            if (all_items[i].id === currentDealItem) {
+                for (k=0; k < prices.length; k++) {
+                    if (prices[k].id === currentDealItem) {
+                        all_items[i].price = prices[k].price
+                    }
+                }
+            }
         }
     }
     var db = utils.getDb();
